@@ -34,7 +34,7 @@ def main():
     """, unsafe_allow_html=True)
     
     # Add input fields for user input
-    ph = st.slider('pH', min_value=0.0, max_value=14.0, step=0.1)
+    ph = st.slider('pH', min_value=0.0,max_value=14.0, step=0.1)
     Hardness = st.slider('Hardness', min_value=100, max_value=300, step=1)
     Solids = st.slider('Solids', min_value=10000, max_value=30000, step=100)
     Chloramines = st.slider('Chloramines', min_value=0.0, max_value=20.0, step=0.1)

@@ -56,21 +56,21 @@ def main():
         
        # clean=scale.transform(input_data)
         print("cleannnn", scaled_input_data)
-        model.predict_proba(scaled_input_data)
+        # model.predict_proba(scaled_input_data)
         prediction = model.predict(scaled_input_data)
-        probabilities = model.predict_proba(scaled_input_data)
+        # probabilities = model.predict_proba(scaled_input_data)
         print(model.predict(scaled_input_data))
 
         # Display the prediction
         if prediction[0] == 0:
             st.write('The water quality is predicted to be non-potable.')
             # Display the probability estimates for all classes
-            st.write('Probability estimates for all classes:', probabilities)
+            # st.write('Probability estimates for all classes:', probabilities)
 
         else:
             st.write('The water quality is predicted to be potable.')
             # Display the probability estimates for all classes
-            st.write('Probability estimates for all classes:', probabilities)
+            # st.write('Probability estimates for all classes:', probabilities)
             
     #st.experimental_rerun()
 

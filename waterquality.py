@@ -1,10 +1,20 @@
 import streamlit as st
 import joblib
+import pickle
 from sklearn.preprocessing import StandardScaler
 
 # Load the trained model
-model = joblib.load('quality_model.pkl')
-scale = joblib.load('scaler.pkl')
+# model = joblib.load('quality_model.pkl')
+# scale = joblib.load('scaler.pkl')
+
+# Load the pickled model
+with open('water_model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
+# Load the pickled scaler
+with open('water_scaler.pkl', 'rb') as f:
+    scale = pickle.load(f)
+
 # scale = StandardScaler()
 
 # Define the Streamlit app
@@ -24,7 +34,7 @@ def main():
     """, unsafe_allow_html=True)
     
     # Add input fields for user input
-    ph = st.slider('pH', min_value=0.0, max_value=14.0, step=0.1)
+    ph = st.slider('pH', min_value=0.0,max_value=14.0, step=0.1)
     Hardness = st.slider('Hardness', min_value=100, max_value=300, step=1)
     Solids = st.slider('Solids', min_value=10000, max_value=30000, step=100)
     Chloramines = st.slider('Chloramines', min_value=0.0, max_value=20.0, step=0.1)

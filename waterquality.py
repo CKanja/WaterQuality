@@ -1,10 +1,20 @@
 import streamlit as st
 import joblib
+import pickle
 from sklearn.preprocessing import StandardScaler
 
 # Load the trained model
-model = joblib.load('quality_model.pkl')
-scale = joblib.load('scaler.pkl')
+# model = joblib.load('quality_model.pkl')
+# scale = joblib.load('scaler.pkl')
+
+# Load the pickled model
+with open('water_model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
+# Load the pickled scaler
+with open('water_scaler.pkl', 'rb') as f:
+    scale = pickle.load(f)
+
 # scale = StandardScaler()
 
 # Define the Streamlit app

@@ -3,10 +3,6 @@ import joblib
 import pickle
 from sklearn.preprocessing import StandardScaler
 
-# Load the trained model
-# model = joblib.load('quality_model.pkl')
-# scale = joblib.load('scaler.pkl')
-
 # Load the pickled model
 with open('water_model.pkl', 'rb') as f:
     model = pickle.load(f)
@@ -14,8 +10,6 @@ with open('water_model.pkl', 'rb') as f:
 # Load the pickled scaler
 with open('water_scaler.pkl', 'rb') as f:
     scale = pickle.load(f)
-
-# scale = StandardScaler()
 
 # Define the Streamlit app
 def main():
@@ -47,33 +41,22 @@ def main():
     # When the user clicks the 'Predict' button
     if st.button('Predict'):
         # Prepare the input data
-        #input_data = [[8.322986672,	300.2524622,	28049.64628,	8.827061283,	297.8130845,	358.7258688,	18.70927337,	60.91142039,	4.052135728]] 
         input_data = [[ph, Hardness, Solids,  Chloramines, Sulfate, Conductivity, Organic_carbon, Trihalomethanes, Turbidity]] 
-        # print(ph, hardness, solids,  chloramines, sulfate, conductivity, organic_carbon, trihalomethanes, turbidity)
-        print("inputttt",input_data)
         # Transform the input data using the pre-fitted scaler
         scaled_input_data = scale.transform(input_data)
         
-       # clean=scale.transform(input_data)
-        print("cleannnn", scaled_input_data)
-        # model.predict_proba(scaled_input_data)
         prediction = model.predict(scaled_input_data)
         probabilities = model.predict_proba(scaled_input_data)
-        print(model.predict(scaled_input_data))
-
+        
         # Display the prediction
         if prediction[0] == 0:
-            st.write('The water quality is predicted to be non-potable.')
-            # Display the probability estimates for all classes
-            st.write('Probability estimates for all classes:', probabilities)
+            st.error('The water quality is predicted to be non-potable.')
+            st.image('https://newsigns.com.au/cdn/shop/products/Non-Potable-Water.jpg?v=1608608300', width=300)           
 
         else:
-            st.write('The water quality is predicted to be potable.')
-            # Display the probability estimates for all classes
-            st.write('Probability estimates for all classes:', probabilities)
-            
-    #st.experimental_rerun()
-
+            st.success('The water quality is predicted to be potable.')
+            st.image('https://www.australiansafetysigns.net.au/cdn/shop/products/prohibition_POTABLE_WATER.jpeg?v=1571438535', width=300)
+                       
 
 if __name__ == '__main__':
     main()
